@@ -6,7 +6,29 @@
 </head>
 
 <body>
-  <p>Content goes here.</p>
+  <h1>Welcome to the Fun Facts Page!</h1>
+  <div id="fact">Click the button below to get a fun fact!</div>
+  <button onclick="getFunFact()">Get a Fun Fact</button>
+  
+  <script>
+    async function getFunFact() {
+      try {
+        // Fetch a random fun fact from an API (example API below)
+        const response = await fetch('https://uselessfacts.jsph.pl/random.json?language=en');
+        const data = await response.json();
+  
+        // Display the fact in the HTML element with id "fact"
+        document.getElementById('fact').textContent = data.text;
+      } catch (error) {
+        console.error("Error fetching fun fact:", error);
+        document.getElementById('fact').textContent = "Sorry, couldn't load a fun fact!";
+      }
+    }
+  
+    // Fetch a fun fact as soon as the page loads
+    window.onload = getFunFact;
+  </script>
+  
 </body>
 
 </html>
